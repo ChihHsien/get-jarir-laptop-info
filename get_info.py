@@ -36,7 +36,7 @@ def get_laptop_info_by_brand(brand):
                 if any(c in t.lower() for c in ["intel", "amd"]) and _cpu_count is 0:
                     _cpu = t
                     _cpu_count = _cpu_count + 1
-                elif any(g in t.lower() for g in ["nvidia", "amd"]):
+                elif any(g in t.lower() for g in ["nvidia", "amd", "intel"]):
                     _gpu = t
 
             result_list.append([_title, _cpu, _gpu, _price])
