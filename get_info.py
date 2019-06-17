@@ -17,9 +17,8 @@ def get_laptop_info_by_brand(brand):
     result_list = []
 
     while True:
-        url = "https://www.jarir.com/sa-en/catalogsearch/result/?order=priority&dir=asc&q=laptop+" + str(brand) + \
-              "&p=" + str(page) + "&is_scroll=1"
-        # print "Page: " + str(page)
+        url = "https://www.jarir.com/sa-en/catalogsearch/result/?order=priority&dir=asc&q=" + str(brand) + \
+              "+laptop&p=" + str(page) + "&is_scroll=1"
         re = requests.get(url)
         soup = BeautifulSoup(re.text, "lxml")
         matches = soup.findAll("h3", {"class": "product-name"})
