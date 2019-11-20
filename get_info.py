@@ -2,6 +2,7 @@ import csv
 import time
 import requests
 import json
+import random
 
 from bs4 import BeautifulSoup
 from flask import Flask, stream_with_context, request
@@ -11,6 +12,14 @@ from cStringIO import StringIO
 
 app = Flask(__name__)
 
+user_agent_list = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+    'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
+    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)'
+]
+
 
 def get_laptop_info_by_brand(brand):
     page = 1
@@ -19,7 +28,9 @@ def get_laptop_info_by_brand(brand):
     while True:
         url = "https://www.jarir.com/sa-en/catalogsearch/result/?order=priority&dir=asc&q=" + str(brand) + \
               "+laptop&p=" + str(page) + "&is_scroll=1"
-        re = requests.get(url)
+        user_agent = random.choice(user_agent_list)
+        headers = {'User-Agent': user_agent}
+        re = requests.get(url, headers=headers)
         soup = BeautifulSoup(re.text, "lxml")
         matches = soup.findAll("h3", {"class": "product-name"})
 
