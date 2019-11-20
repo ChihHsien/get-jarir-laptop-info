@@ -5,5 +5,5 @@ gunicorn==19.6.0
 itsdangerous==1.1.0
 lxml==4.2.5
 MarkupSafe==1.1.0
-requests==2.18.4
+requests==2.20.0
 Werkzeug==0.14.1
