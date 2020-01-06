@@ -1,1 +1,1 @@
-web gunicorn get_info:app
+web gunicorn get_info:app --timeout 120
